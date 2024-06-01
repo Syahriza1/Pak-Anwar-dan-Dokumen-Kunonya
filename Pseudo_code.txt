@@ -1,0 +1,57 @@
+Program : Pak Anwar dan Dokumen Kunonya
+
+Deklarasi : 
+M : Int
+N : Int
+numFamilies : Int
+person : String
+
+Deskripsi  : 
+ 
+    scanner = new Scanner(System.in)
+
+    M = scanner.nextInt()
+    N = scanner.nextInt()
+    scanner.nextLine()
+
+    adjacencyList = new Map<String, List<String>>()
+
+    for i = 1 to N do:
+        relation = scanner.nextLine()
+        parts = relation.split(" ")  // Split the string by space
+        person1 = parts[0]
+        person2 = parts[2]
+
+        if person1 not in adjacencyList:
+            adjacencyList[person1] = new List<String>()
+        if person2 not in adjacencyList:
+            adjacencyList[person2] = new List<String>()
+
+        adjacencyList[person1].add(person2)
+        adjacencyList[person2].add(person1)
+
+    numFamilies = findNumberOfFamilies(adjacencyList)
+    print numFamilies
+
+function findNumberOfFamilies(adjacencyList):
+    visited = new Set<String>()
+    numFamilies = 0
+
+    for person in adjacencyList.keys() do:
+        if person not in visited:
+            bfs(person, adjacencyList, visited)
+            numFamilies++
+
+    return numFamilies
+
+function bfs(start, adjacencyList, visited):
+    queue = new Queue<String>()
+    queue.enqueue(start)
+    visited.add(start)
+
+    while queue is not empty do:
+        current = queue.dequeue()
+        for neighbor in adjacencyList[current] do:
+            if neighbor not in visited:
+                visited.add(neighbor)
+                queue.enqueue(neighbor)
