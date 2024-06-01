@@ -1,0 +1,50 @@
+scanner = new Scanner(System.in)		// O(1)
+
+
+M = scanner.nextInt()		// O(1)
+N = scanner.nextInt()		// O(1)
+scanner.nextLine() // konsumsi newline		// O(1)
+
+
+adjacencyList = new Map<String, List<String>>()		// O(1)
+
+
+for i = 1 to N:
+    relation = scanner.nextLine()
+    parts = split relation by " "
+    person1 = parts[0]
+    person2 = parts[2]
+
+    adjacencyList[person1].add(person2)
+    adjacencyList[person2].add(person1)
+							// O(N)
+
+function findNumberOfFamilies(adjacencyList):
+    visited = new Set<String>()		// O(1)
+    numFamilies = 0		// O(1)
+
+    for person in adjacencyList.keys():		// O(V)
+        if person not in visited:		// O(1)
+            bfs(person, adjacencyList, visited)		 // O(V + E)
+            numFamilies++		// O(1)
+
+return numFamilies
+
+function bfs(start, adjacencyList, visited):
+    queue = new Queue<String>()		// O(1)
+    queue.enqueue(start)		// O(1)
+    visited.add(start)		// O(1)
+
+    // Lakukan penelusuran BFS
+    while queue not empty: 		// O(1)
+        current = queue.dequeue()		// O(1)
+        for neighbor in adjacencyList[current]:		// O(V)
+            if neighbor not in visited:		
+                visited.add(neighbor)		
+                queue.enqueue(neighbor)		
+							// O(N)
+
+
+Perhitungan : 
+O(1) + O(1) + O(1) + O(1)  +O(1) + O(N) + O(1) + O(1) + (O(V) * O(1)) + O(V + E) + O(1) + O(1) + O(1) + O(1) + O(1) + O(1) + (O(V) * O(N)) = O(V + E)
+
