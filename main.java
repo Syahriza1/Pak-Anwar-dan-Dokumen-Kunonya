@@ -34,4 +34,23 @@ private static int findNumberOfFamilies(Map<String, List<String>> adjacencyList)
         }
 
         return numFamilies;
+}
+
+private static void bfs(String start, Map<String, List<String>> adjacencyList, Set<String> visited) {
+        Queue<String> queue = new LinkedList<>();
+        queue.add(start);
+        visited.add(start);
+
+        while (!queue.isEmpty()) {
+            String current = queue.poll();
+            for (String neighbor : adjacencyList.getOrDefault(current, Collections.emptyList())) {
+                if (!visited.contains(neighbor)) {
+                    visited.add(neighbor);
+                    queue.add(neighbor);
+                }
+            }
+        }
     }
+}
+
+   
