@@ -21,3 +21,17 @@ public static void main(String[] args) {
         int numFamilies = findNumberOfFamilies(adjacencyList);
         System.out.println(numFamilies);
     }
+
+private static int findNumberOfFamilies(Map<String, List<String>> adjacencyList) {
+        Set<String> visited = new HashSet<>();
+        int numFamilies = 0;
+
+        for (String person : adjacencyList.keySet()) {
+            if (!visited.contains(person)) {
+                bfs(person, adjacencyList, visited);
+                numFamilies++;
+            }
+        }
+
+        return numFamilies;
+    }
