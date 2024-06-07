@@ -1,4 +1,5 @@
 import java.util.*;
+public class main {
 public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
@@ -21,7 +22,6 @@ public static void main(String[] args) {
         int numFamilies = findNumberOfFamilies(adjacencyList);
         System.out.println(numFamilies);
     }
-
 private static int findNumberOfFamilies(Map<String, List<String>> adjacencyList) {
         Set<String> visited = new HashSet<>();
         int numFamilies = 0;
